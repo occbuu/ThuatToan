@@ -602,6 +602,7 @@ namespace MvcMovie.Controllers
                 quick(items, newPivot + 1, right,type);
             }
         }
+
         public void QuickSort(SinhVien[] items,string type)
         {
             quick(items, 0, items.Length - 1,type);
