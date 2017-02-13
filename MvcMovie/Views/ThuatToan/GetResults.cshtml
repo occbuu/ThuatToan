@@ -1,0 +1,61 @@
+﻿@using MvcMovie.Controllers;
+
+@model List<MvcMovie.Controllers.SinhVien>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <a href="#" class="show-sidebar">
+            <i class="fa fa-bars"></i>
+        </a>
+        <ol class="breadcrumb pull-left">
+            <li><a href="javascript:void(0);">Kết qủa sau khi sắp xếp</a></li>
+            <li><a href="#">@ViewBag.PhuongPhap - @ViewBag.SapXepTheo</a></li>
+        </ol>
+        <div id="social" class="pull-right">
+            <a href="#"><i class="fa fa-google-plus"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+        </div>
+    </div>
+</div>
+<!--End Breadcrumb-->
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-content">
+                <p class="page-header">Danh sách sinh viên sau khi sắp xếp </p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Họ Tên</th>
+                            <th>MSSV</th>
+                            <th>Số Hồ Sơ</th>
+                            <th>Ngày Sinh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var sv in Model)
+                        {
+                            <tr>
+                                <td>@sv.STT</td>
+                                <td>@sv.HoTen</td>
+                                <td>@sv.MSSV</td>
+                                <td>@sv.SHS</td>
+                                <td>@sv.NgaySinh</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+
+                </div>
+        </div>
+    </div>
+</div>
+

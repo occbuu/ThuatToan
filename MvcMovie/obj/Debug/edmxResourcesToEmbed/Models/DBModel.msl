@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestSortModelStoreContainer" CdmEntityContainer="TestSortEntities">
+    <EntitySetMapping Name="SVs">
+      <EntityTypeMapping TypeName="TestSortModel.SV">
+        <MappingFragment StoreEntitySet="SV">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="STT" ColumnName="STT" />
+          <ScalarProperty Name="SoBaoDanh" ColumnName="SoBaoDanh" />
+          <ScalarProperty Name="SHS" ColumnName="SHS" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="NoiSinh" ColumnName="NoiSinh" />
+          <ScalarProperty Name="NganhHoc" ColumnName="NganhHoc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

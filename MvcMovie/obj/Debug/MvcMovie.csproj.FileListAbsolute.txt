@@ -57,11 +57,6 @@ D:\HOC TAP\Cao hoc\THUAT TOAN NANG CAO\demo\ThuatToan\MvcMovie\obj\Debug\MvcMovi
 D:\HOC TAP\Cao hoc\THUAT TOAN NANG CAO\demo\ThuatToan\MvcMovie\obj\Debug\MvcMovie.csproj.GenerateResource.Cache
 D:\HOC TAP\Cao hoc\THUAT TOAN NANG CAO\demo\ThuatToan\MvcMovie\obj\Debug\MvcMovie.dll
 D:\HOC TAP\Cao hoc\THUAT TOAN NANG CAO\demo\ThuatToan\MvcMovie\obj\Debug\MvcMovie.pdb
-D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\obj\Debug\MvcMovie.csprojResolveAssemblyReference.cache
-D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\obj\Debug\MvcMovie.Migrations.Initial.resources
-D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\obj\Debug\MvcMovie.Migrations.Rating.resources
-D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\obj\Debug\MvcMovie.Migrations.DataAnnotations.resources
-D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\obj\Debug\MvcMovie.csproj.GenerateResource.Cache
 D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\obj\Debug\MvcMovie.dll
 D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\obj\Debug\MvcMovie.pdb
 D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\bin\MvcMovie.dll.config
@@ -116,3 +111,4 @@ D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\bin\Microsof
 D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\bin\Microsoft.Owin.Security.Google.xml
 D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Desktop\HaoLee\Study\ptit\Thuat Toan Nang Cao\ThuatToan\MvcMovie\obj\Debug\MvcMovie.csprojResolveAssemblyReference.cache

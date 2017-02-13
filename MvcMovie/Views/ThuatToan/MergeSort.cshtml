@@ -1,0 +1,184 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Start Breadcrumb-->
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <a href="#" class="show-sidebar">
+            <i class="fa fa-bars"></i>
+        </a>
+        <ol class="breadcrumb pull-left">
+            <li><a href="javascript:void(0);">Các phương pháp</a></li>
+            <li><a href="#">Phương pháp Trộn trực tiếp – Merge Sort</a></li>
+        </ol>
+        <div id="social" class="pull-right">
+            <a href="#"><i class="fa fa-google-plus"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+        </div>
+    </div>
+</div>
+<!--End Breadcrumb-->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-content">
+                <p class="page-header">[1] Code cài đặt trên C# </p>
+                <h4>Các bước tiến hành <small> Merge Sort  </small> </h4>
+                <p>
+                    Bước 1: 	k = 1; //k là chiều dài của dãy con trong bước hiện hành
+                    <br />Bước 2: Tách dãy a1, a2… an thành 2 dãy b, c theo nguyên tắc luôn phiên từng nhóm k phần tử:
+                    <br />b=a1 … ak, a2k+1 …. a3k
+                    <br />c = ak+1 … a2k, a3k+1 …. a4k
+                    <br />Bước 3: Trộn từng cặp dãy con gồm k phần tử của 2 dãy b, c vào a;
+                    <br />Bước 4:	k = k * 2;
+                    <br />Nếu k < n thì trở lại Bước 2;
+                    <br />Ngược lại: Dừng.
+
+                </p>
+                <p>
+
+                </p>
+                <p>
+                    <pre>
+public void MergeSort(T[] items) 
+{     
+    if (items.Length <= 1)     
+    {
+        return;
+    } 
+ 
+    int leftSize = items.Length / 2;     
+    int rightSize = items.Length - leftSize; 
+ 
+    T[] left = new T[leftSize];
+    T[] right = new T[rightSize]; 
+ 
+    Array.Copy(items, 0, left, 0, leftSize);     
+    Array.Copy(items, leftSize, right, 0, rightSize); 
+ 
+    MergeSort(left);     
+    MergeSort(right);     
+    MergeSort(items, left, right); 
+}  
+                    </pre>
+                    <pre>
+private void Merge(T[] items, T[] left, T[] right) 
+{     
+    int leftIndex = 0;     
+    int rightIndex = 0;     
+    int targetIndex = 0; 
+ 
+    int remaining = left.Length + right.Length; 
+ 
+    while(remaining > 0) 
+    {
+        if (leftIndex >= left.Length)         
+        {
+            items[targetIndex] = right[rightIndex++];
+        }
+        else if (rightIndex >= right.Length)
+        {
+            items[targetIndex] = left[leftIndex++];
+        }
+        else if (left[leftIndex].CompareTo(right[rightIndex]) < 0)
+        {
+            items[targetIndex] = left[leftIndex++];
+        }
+        else
+        {
+            items[targetIndex] = right[rightIndex++];         
+        }
+      
+        targetIndex++;         
+        remaining--; 
+    }
+}
+</pre>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-content">
+                <p class="page-header">[2] Chạy thuật toán</p>
+                <p>
+                    Sắp xếp một danh sách sinh viên khoảng 2.000 dòng
+                </p>
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="RunSort('SHS');"> Sắp xếp theo [Số Hồ Sơ] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('NgaySinh');"> Sắp xếp theo [Ngày Sinh] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('STT');"> Sắp xếp theo [STT] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('MSSV');"> Sắp xếp theo [MSSV] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('HoTen');"> Sắp xếp theo [Họ Tên] <i class="fa fa-location-arrow"></i>  </button>
+                </div>
+
+                <div id="divKetQua" style="display:none;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tổng số Record</th>
+                                <th>Sắp xếp theo</th>
+                                <th>Tổng thời gian (Giây)</th>
+                                <th>Kết quả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="spanTotRec"></span></td>
+                                <td><span id="spanSapXepTheo"></span></td>
+                                <td><span id="spanTimeRunning"></span></td>
+                                <td><a id="aOpenResult" href="javascript:void(0);" onclick="OpenResult();">Xem</a></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    console.log("test búa xua!!");
+    function RunSort(sType) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("AjaxMergerSort", "ThuatToan")',
+            data: {
+                type: sType
+            },
+            success: function (data) {
+                if (data.status == 1) {
+                    //spanTotRec
+                    $("#spanTotRec").text(data.totalRecord);
+                    $("#spanTimeRunning").text(data.totalTimeStr);
+                    if (sType == "SHS") $("#spanSapXepTheo").text("Số hồ sơ");
+                    if (sType == "NgaySinh") $("#spanSapXepTheo").text("Ngày Sinh");
+                    if (sType == "STT") $("#spanSapXepTheo").text("Số thứ tự");
+                    if (sType == "HoTen") $("#spanSapXepTheo").text("Họ Tên");
+                    if (sType == "MSSV") $("#spanSapXepTheo").text("Mã Số SV");
+                    $("#aOpenResult").attr("onclick", "OpenResult('MergerSort','"+sType+"')");
+                    $("#divKetQua").show(500);
+                }
+                else {
+                    $("#divKetQua").hide(500);
+                    alert(data.sErr);
+                }
+            },
+            async: false,
+        });
+    }
+
+    function OpenResult(pp,type) {
+        window.open('@Url.Action("GetResults", "ThuatToan")?pp='+pp+'&&sxt='+type);
+    }
+</script>

@@ -1,8 +1,151 @@
 ﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
+<!--Start Breadcrumb-->
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <a href="#" class="show-sidebar">
+            <i class="fa fa-bars"></i>
+        </a>
+        <ol class="breadcrumb pull-left">
+            <li><a href="javascript:void(0);">Các phương pháp</a></li>
+            <li><a href="#">Tổng hợp 5 phương pháp</a></li>
+        </ol>
+        <div id="social" class="pull-right">
+            <a href="#"><i class="fa fa-google-plus"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+        </div>
+    </div>
+</div>
+<!--End Breadcrumb-->
 
-<h2>
-    @{
-        @ViewBag.xuat;
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-content">
+                <p class="page-header">[2] Chạy thuật toán</p>
+                <p>
+                    Sắp xếp một danh sách sinh viên khoảng 2.000 dòng
+                </p>
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="RunSort('SHS');"> Sắp xếp theo [Số Hồ Sơ] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('NgaySinh');"> Sắp xếp theo [Ngày Sinh] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('STT');"> Sắp xếp theo [STT] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('MSSV');"> Sắp xếp theo [MSSV] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('HoTen');"> Sắp xếp theo [Họ Tên] <i class="fa fa-location-arrow"></i>  </button>
+                </div>
+
+                <div id="divKetQua" style="display:none;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Phương pháp</th>
+                                <th>Tổng số Record</th>
+                                <th>Sắp xếp theo</th>
+                                <th>Tổng thời gian (Giây)</th>
+                                <th>Kết quả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Selection Sort</td>
+                                <td><span id="spanTotRec_SelectionSort"></span></td>
+                                <td><span id="spanSapXepTheo_SelectionSort"></span></td>
+                                <td><span id="spanTimeRunning_SelectionSort"></span></td>
+                                <td><a id="aOpenResult_SelectionSort" href="javascript:void(0);" onclick="OpenResult();">Xem</a></td>
+                            </tr>
+                            <tr>
+                                <td>Insert Sort</td>
+                                <td><span id="spanTotRec_InsertSort"></span></td>
+                                <td><span id="spanSapXepTheo_InsertSort"></span></td>
+                                <td><span id="spanTimeRunning_InsertSort"></span></td>
+                                <td><a id="aOpenResult_InsertSort" href="javascript:void(0);" onclick="OpenResult();">Xem</a></td>
+                            </tr>
+                            <tr>
+                                <td>Bubble Sort</td>
+                                <td><span id="spanTotRec_BubbleSort"></span></td>
+                                <td><span id="spanSapXepTheo_BubbleSort"></span></td>
+                                <td><span id="spanTimeRunning_BubbleSort"></span></td>
+                                <td><a id="aOpenResult_BubbleSort" href="javascript:void(0);" onclick="OpenResult();">Xem</a></td>
+                            </tr>
+                            <tr>
+                                <td>Merge Sort</td>
+                                <td><span id="spanTotRec_MergeSort"></span></td>
+                                <td><span id="spanSapXepTheo_MergeSort"></span></td>
+                                <td><span id="spanTimeRunning_MergeSort"></span></td>
+                                <td><a id="aOpenResult_MergeSort" href="javascript:void(0);" onclick="OpenResult();">Xem</a></td>
+                            </tr>
+                            <tr>
+                                <td>Quick Sort</td>
+                                <td><span id="spanTotRec_QuickSort"></span></td>
+                                <td><span id="spanSapXepTheo_QuickSort"></span></td>
+                                <td><span id="spanTimeRunning_QuickSort"></span></td>
+                                <td><a id="aOpenResult_QuickSort" href="javascript:void(0);" onclick="OpenResult();">Xem</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //console.log("test búa xua!!");
+    function RunSort(sType)
+    {
+        RunSort1(sType, 'SelectionSort');
+        RunSort1(sType, 'InsertSort');
+        RunSort1(sType, 'BubbleSort');
+        RunSort1(sType, 'MergeSort');
+        RunSort1(sType, 'QuickSort');
     }
-</h2>
+
+    function RunSort1(sType, pp) {
+        var _url = "";
+        if (pp == "SelectionSort") _url = '@Url.Action("AjaxSelectionSort", "ThuatToan")';
+        if (pp == "InsertSort") _url = '@Url.Action("AjaxInsertSort", "ThuatToan")';
+        if (pp == "BubbleSort") _url = '@Url.Action("AjaxBubbleSort", "ThuatToan")';
+        if (pp == "MergeSort") _url = '@Url.Action("AjaxMergeSort", "ThuatToan")';
+        if (pp == "QuickSort") _url = '@Url.Action("AjaxQuickSort", "ThuatToan")';
+
+
+        $.ajax({
+            type: 'POST',
+            url: _url,
+            data: {
+                type: sType
+            },
+            success: function (data) {
+                if (data.status == 1) {
+                    //spanTotRec
+                    $("#spanTotRec_"+pp).text(data.totalRecord);
+                    $("#spanTimeRunning_"+pp).text(data.totalTimeStr);
+                    if (sType == "SHS") $("#spanSapXepTheo_"+pp).text("Số hồ sơ");
+                    if (sType == "NgaySinh") $("#spanSapXepTheo_" + pp).text("Ngày Sinh");
+                    if (sType == "STT") $("#spanSapXepTheo_" + pp).text("Số thứ tự");
+                    if (sType == "HoTen") $("#spanSapXepTheo" + pp).text("Họ Tên");
+                    if (sType == "MSSV") $("#spanSapXepTheo_" + pp).text("Mã Số SV");
+                    $("#aOpenResult_" + pp).attr("onclick", "OpenResult('BubbleSort','" + sType + "')");
+                    $("#divKetQua").show(500);
+                }
+                else {
+                    $("#divKetQua").hide(500);
+                    alert(data.sErr);
+                }
+            },
+            async: false,
+        });
+    }
+
+    function OpenResult(pp,type) {
+        window.open('@Url.Action("GetResults", "ThuatToan")?pp='+pp+'&&sxt='+type);
+    }
+</script>

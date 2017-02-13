@@ -1,0 +1,37 @@
+﻿<ul class="nav main-menu">
+    <li>
+        <a href="@Url.Action("Index","Home")" class="ajax-link">
+            <i class="fa fa-dashboard"></i>
+            <span class="hidden-xs">Trang chủ</span>
+        </a>
+    </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle">
+            <i class="fa fa-bar-chart-o"></i>
+            <span class="hidden-xs">Các phương pháp sắp xếp thông dụng</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="ajax-link" href="@Url.Action("SelectionSort","ThuatToan")">PP Chọn trực tiếp</a></li>
+            <li><a class="ajax-link" href="@Url.Action("InsertSort","ThuatToan")">PP Chèn trực tiếp</a></li>
+            <li><a class="ajax-link" href="@Url.Action("BubbleSort","ThuatToan")">PP Nổi bọt</a></li>
+            <li><a class="ajax-link" href="@Url.Action("MergeSort","ThuatToan")">PP Trộn</a></li>
+            <li><a class="ajax-link" href="@Url.Action("QuickSort", "ThuatToan")">PP Sắp xếp nhanh</a></li>
+            <li><a class="ajax-link" href="@Url.Action("Index","ThuatToan")">Tổng hợp 5 PP</a></li>                    
+        </ul>
+    </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle">
+            <i class="fa fa-table"></i>
+            <span class="hidden-xs">Khử đệ Quy</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="ajax-link" href="@Url.Action("KhuDQQS","ThuatToan")">Khử đệ Quy QuickSort</a></li>                     
+        </ul>
+    </li>
+    <li>
+        <a href="@Url.Action("Contact","Home")" class="ajax-link">
+            <i class="fa fa-dashboard"></i>
+            <span class="hidden-xs">Tài liệu tham khảo</span>
+        </a>
+    </li>
+</ul>

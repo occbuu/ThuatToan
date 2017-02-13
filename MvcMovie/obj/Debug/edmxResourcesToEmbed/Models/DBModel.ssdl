@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestSortModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="SV">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="STT" Type="int" />
+    <Property Name="SoBaoDanh" Type="nvarchar" MaxLength="250" />
+    <Property Name="SHS" Type="float" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="500" />
+    <Property Name="GioiTinh" Type="nvarchar" MaxLength="250" />
+    <Property Name="NgaySinh" Type="datetime" />
+    <Property Name="NoiSinh" Type="nvarchar" MaxLength="500" />
+    <Property Name="NganhHoc" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityContainer Name="TestSortModelStoreContainer">
+    <EntitySet Name="SV" EntityType="Self.SV" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

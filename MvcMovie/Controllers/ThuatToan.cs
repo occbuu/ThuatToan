@@ -84,6 +84,7 @@ namespace MvcMovie.Controllers
     public class SinhVien
     {
         public int STT { get; set; }
+        public double SHS { get; set; }
         public string MSSV { get; set; }
         public string HoTen { get; set; }
         public DateTime NgaySinh { get; set; }
@@ -96,6 +97,14 @@ namespace MvcMovie.Controllers
                 return 0;
         }
 
+        public int CompareTo_SHS(SinhVien temp)
+        {
+            if (this.SHS > temp.SHS)
+                return 1;
+            else
+                return 0;
+        }
+
         public int CompareTo_MSSV(SinhVien temp)
         {
             if (this.MSSV.CompareTo(temp.MSSV) > 0)
@@ -103,6 +112,7 @@ namespace MvcMovie.Controllers
             else
                 return 0;
         }
+
         public int CompareTo_HoTen(SinhVien temp)
         {
             if (this.HoTen.CompareTo(temp.HoTen) > 0)
@@ -110,6 +120,7 @@ namespace MvcMovie.Controllers
             else
                 return 0;
         }
+
         public int CompareTo_NgaySinh(SinhVien temp)
         {
             if (this.NgaySinh > temp.NgaySinh)
@@ -143,7 +154,13 @@ namespace MvcMovie.Controllers
                                 { Swap(items, i - 1, i); swapped = true; }
                                 break;
                             }
-                            case "MSSV":
+                        case "SHS":
+                            {
+                                if (items[i - 1].CompareTo_SHS(items[i]) > 0)
+                                { Swap(items, i - 1, i); swapped = true; }
+                                break;
+                            }
+                        case "MSSV":
                             {
                                 if (items[i - 1].CompareTo_MSSV(items[i]) > 0)
                                 { Swap(items, i - 1, i); swapped = true; }
@@ -268,6 +285,19 @@ namespace MvcMovie.Controllers
                         }
                         break;
                     }
+                case "SHS":
+                    {
+                        while (sortedRangeEndIndex < items.Length)
+                        {
+                            if (items[sortedRangeEndIndex].CompareTo_SHS(items[sortedRangeEndIndex - 1]) < 0)
+                            {
+                                int insertIndex = FindInsertionIndex(items, items[sortedRangeEndIndex], type);
+                                Insert(items, insertIndex, sortedRangeEndIndex);
+                            }
+                            sortedRangeEndIndex++;
+                        }
+                        break;
+                    }
                 case "MSSV":
                     {
                         while (sortedRangeEndIndex < items.Length)
@@ -313,7 +343,6 @@ namespace MvcMovie.Controllers
         }
 
         //Selection Sort
-
         private int FindIndexOfSmallestFromIndex(SinhVien[] items, int sortedRangeEnd, string type)
         {
             SinhVien currentSmallest = items[sortedRangeEnd];
@@ -326,6 +355,18 @@ namespace MvcMovie.Controllers
                         for (int i = sortedRangeEnd + 1; i < items.Length; i++)
                         {
                             if (currentSmallest.CompareTo_STT(items[i]) > 0)
+                            {
+                                currentSmallest = items[i];
+                                currentSmallestIndex = i;
+                            }
+                        }
+                        break;
+                    }
+                case "SHS":
+                    {
+                        for (int i = sortedRangeEnd + 1; i < items.Length; i++)
+                        {
+                            if (currentSmallest.CompareTo_SHS(items[i]) > 0)
                             {
                                 currentSmallest = items[i];
                                 currentSmallestIndex = i;
@@ -592,6 +633,8 @@ namespace MvcMovie.Controllers
             Swap(items, storeIndex, right);
             return storeIndex;
         }
+
+      
         private void quick(SinhVien[] items, int left, int right,string type)
         {
             if (left < right)

@@ -1,0 +1,145 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Start Breadcrumb-->
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <a href="#" class="show-sidebar">
+            <i class="fa fa-bars"></i>
+        </a>
+        <ol class="breadcrumb pull-left">
+            <li><a href="javascript:void(0);">Các phương pháp</a></li>
+            <li><a href="#">Phương pháp Nổi Bọt – Bubble Sort</a></li>
+        </ol>
+        <div id="social" class="pull-right">
+            <a href="#"><i class="fa fa-google-plus"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+        </div>
+    </div>
+</div>
+<!--End Breadcrumb-->
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-content">
+                <p class="page-header">[1] Code cài đặt trên C# </p>
+                <h4>Các bước tiến hành <small> Bubble Sort  </small> </h4>
+                <p>
+                    Bước 1: i = 1;
+                    <br />Bước 2: Tìm phần tử a[min] nhỏ nhất trong dãy hiện hành từ a[i] đến a[n];
+                    <br />Bước 3: Hoán vị a[min] và a[i];
+                    <br />Bước 4: Nếu i < (n-1) thì i = i + 1;      Lặp lại Bước 2; Ngược lại: Dừng.
+                </p>
+                <p>
+
+                </p>
+                <p>
+                    <pre>
+public void BubbleSort(T[] items) 
+{     
+    bool swapped;  
+    do     
+    {         
+        swapped = false;         
+        for (int i = 1; i < items.Length; i++)   
+        {             
+            if (items[i - 1].CompareTo(items[i]) > 0) 
+            {                 
+                Swap(items, i - 1, i);                 
+                swapped = true;             
+            }
+        }
+    } while (swapped != false); 
+}  
+                    </pre>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-content">
+                <p class="page-header">[2] Chạy thuật toán</p>
+                <p>
+                    Sắp xếp một danh sách sinh viên khoảng 10.000 dòng
+                </p>
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="RunSort('SHS');"> Sắp xếp theo [Số Hồ Sơ] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('NgaySinh');"> Sắp xếp theo [Ngày Sinh] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('STT');"> Sắp xếp theo [STT] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('MSSV');"> Sắp xếp theo [MSSV] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('HoTen');"> Sắp xếp theo [Họ Tên] <i class="fa fa-location-arrow"></i>  </button>
+                </div>
+
+                <div id="divKetQua" style="display:none;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tổng số Record</th>
+                                <th>Sắp xếp theo</th>
+                                <th>Tổng thời gian (Giây)</th>
+                                <th>Kết quả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="spanTotRec"></span></td>
+                                <td><span id="spanSapXepTheo"></span></td>
+                                <td><span id="spanTimeRunning"></span></td>
+                                <td><a id="aOpenResult" href="javascript:void(0);" onclick="OpenResult();">Xem</a></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    console.log("test búa xua!!");
+    function RunSort(sType) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("AjaxBubbleSort", "ThuatToan")',
+            data: {
+                type: sType
+            },
+            success: function (data) {
+                if (data.status == 1) {
+                    //spanTotRec
+                    $("#spanTotRec").text(data.totalRecord);
+                    $("#spanTimeRunning").text(data.totalTimeStr);
+                    if (sType == "SHS") $("#spanSapXepTheo").text("Số hồ sơ");
+                    if (sType == "NgaySinh") $("#spanSapXepTheo").text("Ngày Sinh");
+                    if (sType == "STT") $("#spanSapXepTheo").text("Số thứ tự");
+                    if (sType == "HoTen") $("#spanSapXepTheo").text("Họ Tên");
+                    if (sType == "MSSV") $("#spanSapXepTheo").text("Mã Số SV");
+                    $("#aOpenResult").attr("onclick", "OpenResult('BubbleSort','"+sType+"')");
+                    $("#divKetQua").show(500);
+                }
+                else {
+                    $("#divKetQua").hide(500);
+                    alert(data.sErr);
+                }
+            },
+            async: false,
+        });
+    }
+
+    function OpenResult(pp,type) {
+        window.open('@Url.Action("GetResults", "ThuatToan")?pp='+pp+'&&sxt='+type);
+    }
+</script>
+
+

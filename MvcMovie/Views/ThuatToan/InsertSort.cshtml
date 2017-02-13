@@ -1,0 +1,187 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Start Breadcrumb-->
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <a href="#" class="show-sidebar">
+            <i class="fa fa-bars"></i>
+        </a>
+        <ol class="breadcrumb pull-left">
+            <li><a href="javascript:void(0);">Các phương pháp</a></li>
+            <li><a href="#">Phương pháp Chèn trực tiếp – Insert Sort</a></li>
+        </ol>
+        <div id="social" class="pull-right">
+            <a href="#"><i class="fa fa-google-plus"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+        </div>
+    </div>
+</div>
+<!--End Breadcrumb-->
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-content">
+                <p class="page-header">[1] Code cài đặt trên C# </p>
+                <h4>Các bước tiến hành <small> Insert Sort  </small> </h4>
+                <p>
+                    Bước 1: i = 2; 	// giả sử có đoạn a[1] đã được sắp
+                    <br />Bước 2: x = a[i]; Tìm vị trí pos thích hợp trong đoạn a[1] đến a[i-1] để chèn a[i] vào;
+                    <br />Bước 3: Dời chỗ các phần tử từ a[pos] đến a[i-1] sang phải 1 vị trí để dành chỗ cho a[i];
+                    <br />Bước 4: a[pos] = x; // có đoạn a[1]…a[i] đã được sắp
+                    <br />Bước 5: 	i = i + 1;
+                    <br />Nếu i <= n: Lặp lại Bước 2;
+                    <br />Ngược lại: Dừng.
+
+                </p>
+              
+                <p>
+                    <pre>
+public void InsertSort(T[] items) 
+{     
+    int sortedRangeEndIndex = 1; 
+    while (sortedRangeEndIndex < items.Length)
+    {
+        if (items[sortedRangeEndIndex].CompareTo(items[sortedRangeEndIndex - 1]) < 0)
+        {
+            int insertIndex = FindInsertionIndex(items, items[sortedRangeEndIndex]);
+            Insert(items, insertIndex, sortedRangeEndIndex);
+        }
+        sortedRangeEndIndex++;
+    } 
+}
+</pre>
+<pre>
+private int FindInsertionIndex(T[] items, T valueToInsert) 
+{     
+    for (int index = 0; index < items.Length; index++)
+    {
+        if (items[index].CompareTo(valueToInsert) > 0)
+        {
+            return index;
+        }
+    } 
+    throw new InvalidOperationException("The insertion index was not found"); 
+}
+</pre>
+<pre>
+private void Insert(T[] itemArray, int indexInsertingAt, int indexInsertingFrom) 
+{
+    // itemArray =       0 1 2 4 5 6 3 7     
+    // insertingAt =     3     
+    // insertingFrom =   6     
+    // actions     
+    //  1: Store index at in temp     temp = 4     
+    //  2: Set index at to index from  -> 0 1 2 3 5 6 3 7   temp = 4     
+    //  3: Walking backward from index from to index at + 1.     
+    //     Shift values from left to right once.     
+    //     0 1 2 3 5 6 6 7   temp = 4     
+    //     0 1 2 3 5 5 6 7   temp = 4     
+    //  4: Write temp value to index at + 1.     
+    //     0 1 2 3 4 5 6 7   temp = 4 
+
+    // Step 1.     
+    T temp = itemArray[indexInsertingAt]; 
+    // Step 2. 
+ 
+    itemArray[indexInsertingAt] = itemArray[indexInsertingFrom]; 
+ 
+    // Step 3.     
+    for (int current = indexInsertingFrom; current > indexInsertingAt; current--) 
+    {
+        itemArray[current] = itemArray[current - 1];
+    } 
+ 
+    // Step 4.     
+    itemArray[indexInsertingAt + 1] = temp; 
+} 
+</pre>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-content">
+                <p class="page-header">[2] Chạy thuật toán</p>
+                <p>
+                    Sắp xếp một danh sách sinh viên khoảng 2.000 dòng
+                </p>
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="RunSort('SHS');"> Sắp xếp theo [Số Hồ Sơ] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('NgaySinh');"> Sắp xếp theo [Ngày Sinh] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('STT');"> Sắp xếp theo [STT] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('MSSV');"> Sắp xếp theo [MSSV] <i class="fa fa-location-arrow"></i>  </button>
+                    <button class="btn btn-primary" onclick="RunSort('HoTen');"> Sắp xếp theo [Họ Tên] <i class="fa fa-location-arrow"></i>  </button>
+                </div>
+
+                <div id="divKetQua" style="display:none;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tổng số Record</th>
+                                <th>Sắp xếp theo</th>
+                                <th>Tổng thời gian </th>
+                                <th>Kết quả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="spanTotRec"></span></td>
+                                <td><span id="spanSapXepTheo"></span></td>
+                                <td><span id="spanTimeRunning"></span></td>
+                                <td><a id="aOpenResult" href="javascript:void(0);" onclick="OpenResult();">Xem</a></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //console.log("test búa xua!!");
+    function RunSort(sType) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("AjaxInsertSort", "ThuatToan")',
+            data: {
+                type: sType
+            },
+            success: function (data) {
+                if (data.status == 1) {
+                    //spanTotRec
+                    $("#spanTotRec").text(data.totalRecord);
+                    $("#spanTimeRunning").text(data.totalTimeStr);
+                    if (sType == "SHS") $("#spanSapXepTheo").text("Số hồ sơ");
+                    if (sType == "NgaySinh") $("#spanSapXepTheo").text("Ngày Sinh");
+                    if (sType == "STT") $("#spanSapXepTheo").text("Số thứ tự");
+                    if (sType == "HoTen") $("#spanSapXepTheo").text("Họ Tên");
+                    if (sType == "MSSV") $("#spanSapXepTheo").text("Mã Số SV");
+                    $("#aOpenResult").attr("onclick", "OpenResult('InsertSort','"+sType+"')");
+                    $("#divKetQua").show(500);
+                }
+                else {
+                    $("#divKetQua").hide(500);
+                    alert(data.sErr);
+                }
+            },
+            async: false,
+        });
+    }
+
+    function OpenResult(pp,type) {
+        window.open('@Url.Action("GetResults", "ThuatToan")?pp='+pp+'&&sxt='+type);
+    }
+</script>
